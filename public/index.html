@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%PUBLIC_URL%/chronicle.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#000000" />
+		<meta
+			name="description"
+			content="Web site created using create-react-app"
+		/>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+		
+		<script>
+			$(document).ready(()=>{
+				gsap.registerPlugin(ScrollTrigger);
+
+				const sectionRef = document.querySelector(".about");
+
+				const words = sectionRef.querySelectorAll(".about__text span");
+				gsap.set(words, {
+					opacity: 0.5,
+				});
+
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: sectionRef,
+						start: "top 10%",
+						end: "+=200%", // adjust to the duration of the timeline
+						pin: true, // pin the element until the end of the timeline
+						scrub: true,
+					},
+				});
+
+				words.forEach((word, index) => {
+					tl.to(
+						word,
+						{
+							opacity: 1,
+							duration: .5,
+						},
+						index * 0.1 
+					);
+				});
+			})
+		</script>
+
+		<link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
+		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+		<title>Chronicle Clone</title>
+	</head>
+	<body>
+		<div id="root"></div>
+	</body>
+</html>
